@@ -111,7 +111,7 @@ int main(int argc, char *argv[])
 
 			if (arg_str == NULL)
 			{
-				printf("L%d: usage: push integer\n", line_number);
+				fprintf(stderr, "L%d: usage: push integer\n", line_number);
 				exit(EXIT_FAILURE);
 			}
 			arg = atoi(arg_str);

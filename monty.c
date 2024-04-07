@@ -4,7 +4,8 @@
 #define EXIT_FAILURE 1
 /** define global variable stack */
 stack_t *stack = NULL;
-
+/* define the global flag */
+int handle_negative = 0;
 /**
  * push - pushes an integer onto the stack
  * @stack: pointer to a pointer to the stack
@@ -13,27 +14,15 @@ stack_t *stack = NULL;
  */
 void push(stack_t **stack, unsigned int line_number)
 {
-	/* convert line_number to a string for validation */
-	char line[20];
-	int i = 0, number;
 	stack_t *new_node = malloc(sizeof(stack_t));
 
-	snprintf(line, sizeof(line), "%d", line_number);
-
-	if (line[0] == '-')
-		i++;
-
-	/* check if input is only numeric characters */
-	for (; line[i] != '\0'; i++)
+	if (line_number < 1)
 	{
-		if (!isdigit(line[i]))
-		{
-			fprintf(stderr, "Error: Invalid input '%s'\n", line);
-			return;
-		}
+		line_number = -line_number;
+		handle_negative = 1;
 	}
-	/* convert string to integer */
-	number = atoi(line);
+	else
+		handle_negative = 0;
 
 	if (new_node == NULL)
 	{
@@ -41,7 +30,7 @@ void push(stack_t **stack, unsigned int line_number)
 		exit(EXIT_FAILURE);
 	}
 
-	new_node->n = number;
+	new_node->n = line_number;
 	new_node->prev = NULL;
 	new_node->next = *stack;
 	/* update prev node pointer if stack is not empty */

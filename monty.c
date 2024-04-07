@@ -13,7 +13,21 @@ stack_t *stack = NULL;
  */
 void push(stack_t **stack, unsigned int line_number)
 {
+	/* convert line_number to a string for validation */
+	char line[20];
+	int i;
 	stack_t *new_node = malloc(sizeof(stack_t));
+
+	snprintf(line, sizeof(line), "%d", line_number);
+	/* check if input is only numeric characters */
+	for (i = 0; line[i] != '\0'; i++)
+	{
+		if (!isdigit(line[i]))
+		{
+			fprintf(stderr, "Error: Invalid input '%s'\n", line);
+			return;
+		}
+	}
 
 	if (new_node == NULL)
 	{

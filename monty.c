@@ -134,7 +134,7 @@ int main(int argc, char *argv[])
 			}
 			if (instructions[i].opcode == NULL)
 			{
-				printf("L%d: unknown instruction %s\n", line_number, opcode);
+				fprintf(stderr, "L%d: unknown instruction %s\n", line_number, opcode);
 				exit(EXIT_FAILURE);
 			}
 		}

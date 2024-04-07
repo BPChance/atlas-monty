@@ -15,12 +15,16 @@ void push(stack_t **stack, unsigned int line_number)
 {
 	/* convert line_number to a string for validation */
 	char line[20];
-	int i;
+	int i = 0, number;
 	stack_t *new_node = malloc(sizeof(stack_t));
 
 	snprintf(line, sizeof(line), "%d", line_number);
+
+	if (line[0] == '-')
+		i++;
+
 	/* check if input is only numeric characters */
-	for (i = 0; line[i] != '\0'; i++)
+	for (; line[i] != '\0'; i++)
 	{
 		if (!isdigit(line[i]))
 		{
@@ -28,6 +32,8 @@ void push(stack_t **stack, unsigned int line_number)
 			return;
 		}
 	}
+	/* convert string to integer */
+	number = atoi(line);
 
 	if (new_node == NULL)
 	{
@@ -35,10 +41,10 @@ void push(stack_t **stack, unsigned int line_number)
 		exit(EXIT_FAILURE);
 	}
 
-	new_node->n = line_number;
+	new_node->n = number;
 	new_node->prev = NULL;
 	new_node->next = *stack;
-
+	/* update prev node pointer if stack is not empty */
 	if (*stack != NULL)
 		(*stack)->prev = new_node;
 

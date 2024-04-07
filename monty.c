@@ -108,6 +108,7 @@ int main(int argc, char *argv[])
 	{
 		{"push", &push},
 		{"pall", &pall},
+		{"pint", &pint},
 		{NULL, NULL}
 	};
 

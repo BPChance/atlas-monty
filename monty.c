@@ -128,11 +128,11 @@ int main(int argc, char *argv[])
 		{
 			arg_str = strtok(NULL, " \n");
 
-			if (arg_str == NULL)
+		/*	if (arg_str == NULL)
 			{
 				fprintf(stderr, "L%d: usage: push integer\n", line_number);
 				exit(EXIT_FAILURE);
-			}
+			} */
 			arg = atoi(arg_str);
 
 			push(&stack, arg);

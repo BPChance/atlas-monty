@@ -11,8 +11,23 @@ stack_t *stack = NULL;
  * @line_number: line number
  * Return: void
  */
-void push(stack_t **stack, int value)
+void push(stack_t **stack, unsigned int line_number)
 {
+	/* pointer to string representation of the integer */
+	char *arg_str;
+	/* int value extracted from the string */
+	int value;
+
+	arg_str = strtok(NULL, " \n");
+
+	if (arg_str == NULL)
+	{
+		fprintf(stderr, "L%d: usage: push integer\n", line_number);
+		exit(EXIT_FAILURE);
+	}
+	/* convert string to integer */
+	value = atoi(arg_str);
+
 	stack_t *new_node = malloc(sizeof(stack_t));
 
 	if (new_node == NULL)

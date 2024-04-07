@@ -80,7 +80,11 @@ int main(int argc, char *argv[])
 
 	if (argc != 2)
 	{
-		fprintf(stderr, "USAGE: %s file\n", argv[0]);
+		if (strncmp(argv[0], "./", 2) == 0)
+			fprintf(stderr, "USAGE: %s file\n", argv[0] + 2);
+		else
+			fprintf(stderr, "USAGE: %s file\n", argv[0]);
+
 		return (EXIT_FAILURE);
 	}
 	FILE *file = fopen(argv[1], "r");
